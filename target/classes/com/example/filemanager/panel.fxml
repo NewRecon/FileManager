@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.example.filemanager.PanelController">
+    <HBox>
+        <ComboBox fx:id="diskBox"/>
+        <TextField fx:id="filePath" editable="false" HBox.hgrow="ALWAYS" />
+        <Button text="UP" />
+    </HBox>
+    <TableView fx:id="fileTable" VBox.vgrow="ALWAYS" />
+</VBox>
