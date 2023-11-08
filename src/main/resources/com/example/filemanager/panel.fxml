@@ -8,9 +8,16 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.example.filemanager.PanelController">
     <HBox>
-        <ComboBox fx:id="diskBox"/>
+        <ComboBox fx:id="diskBox" onAction="#selectDisc"/>
         <TextField fx:id="filePath" editable="false" HBox.hgrow="ALWAYS" />
-        <Button text="UP" />
+        <Button text="UP" onAction="#btnUpAction" />
     </HBox>
     <TableView fx:id="fileTable" VBox.vgrow="ALWAYS" />
+
+    <properties>
+        <ctrl>
+            <fx:reference source="controller"/>
+        </ctrl>
+    </properties>
+
 </VBox>

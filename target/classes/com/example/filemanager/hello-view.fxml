@@ -13,16 +13,16 @@
     </MenuBar>
 
     <HBox VBox.vgrow="ALWAYS">
-        <fx:include fx:id="left" source="panel.fxml" HBox.hgrow="ALWAYS"/>
-        <fx:include fx:id="right" source="panel.fxml" HBox.hgrow="ALWAYS"/>
+        <fx:include fx:id="leftPanel" source="panel.fxml" HBox.hgrow="ALWAYS"/>
+        <fx:include fx:id="rightPanel" source="panel.fxml" HBox.hgrow="ALWAYS"/>
     </HBox>
 
 
     <HBox spacing="5">
-        <Button maxWidth="Infinity" text="Copy" HBox.hgrow="ALWAYS" />
-        <Button maxWidth="Infinity" text="Move" HBox.hgrow="ALWAYS" />
-        <Button maxWidth="Infinity" text="Delete" HBox.hgrow="ALWAYS" />
-        <Button maxWidth="Infinity" text="Close" HBox.hgrow="ALWAYS" onAction="#closeWindowAction"/>
+        <Button maxWidth="Infinity" focusTraversable="false" text="Copy" HBox.hgrow="ALWAYS" onAction="#btnCopyAction"/>
+        <Button maxWidth="Infinity" focusTraversable="false" text="Move" HBox.hgrow="ALWAYS" onAction="#btnMoveAction"/>
+        <Button maxWidth="Infinity" focusTraversable="false" text="Delete" HBox.hgrow="ALWAYS" onAction="#btnDeleteAction"/>
+        <Button maxWidth="Infinity" focusTraversable="false" text="Close" HBox.hgrow="ALWAYS" onAction="#closeWindowAction"/>
       <padding>
          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
       </padding>

@@ -1,22 +1,20 @@
 package com.example.filemanager;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class PanelController implements Initializable {
-    @FXML
-    private Label welcomeText;
 
     @FXML
     private TableView<FileInfo> fileTable;
@@ -24,11 +22,6 @@ public class PanelController implements Initializable {
     @FXML ComboBox<String> diskBox;
 
     @FXML TextField filePath;
-
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -65,6 +58,27 @@ public class PanelController implements Initializable {
         filePath.clear();
 
         updateList(Paths.get("."));
+
+        fileTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getClickCount()==2){
+                    Path path = Paths.get(filePath.getText()).resolve(fileTable.getSelectionModel().getSelectedItem().getName());
+                    if (Files.isDirectory(path)){
+                        updateList(path);
+                    }
+//                    else {
+//                        if (path.toFile().canExecute()){
+//                            try {
+//                                Process p = Runtime.getRuntime().exec(String.valueOf(path));
+//                            } catch (IOException e) {
+//                                throw new RuntimeException(e);
+//                            }
+//                        }
+//                    }
+                }
+            }
+        });
     }
     public void updateList(Path path){
         try {
@@ -78,5 +92,25 @@ public class PanelController implements Initializable {
             alert.showAndWait();
         }
 
+    }
+
+    public void btnUpAction(ActionEvent actionEvent) {
+        Path upPaths = Paths.get(filePath.getText()).getParent();
+        if (upPaths!=null) {
+            updateList(upPaths);
+        }
+    }
+
+    public void selectDisc(ActionEvent actionEvent) {
+        updateList(Paths.get(diskBox.getSelectionModel().getSelectedItem()));
+    }
+
+    public String getSelectedFileName(){
+        if (!fileTable.isFocused()) return null;
+        else return fileTable.getSelectionModel().getSelectedItem().getName();
+    }
+
+    public String getCurrentPath(){
+        return filePath.getText();
     }
 }
